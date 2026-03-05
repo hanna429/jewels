@@ -7,12 +7,15 @@ import {
   PersonOutline
 } from "@mui/icons-material";
 
+import { Link } from "react-router-dom";
+
+
 const CustomNavbar = () => {
   return (
     <Navbar expand="lg" className="navbar-custom" sticky="top">
       <Container>
 
-        <Navbar.Brand href="#" className="brand">
+        <Navbar.Brand as={Link} to="/" className="brand">
           <div className="brand-title">Bronza Jewels</div>
           <small className="brand-subtitle">
             ELEGANCE IN EVERY SPARKLE
@@ -24,12 +27,31 @@ const CustomNavbar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
 
           <Nav className="mx-auto nav-links">
-            <Nav.Link href="#home" className="px-3">Home</Nav.Link>
-            <Nav.Link href="#shop" className="px-3">Shop</Nav.Link>
-            <Nav.Link href="#rings" className="px-3">Rings</Nav.Link>
-            <Nav.Link href="#necklaces" className="px-3">Necklaces</Nav.Link>
-            <Nav.Link href="#earrings" className="px-3">Earrings</Nav.Link>
-            <Nav.Link href="#bracelets" className="px-3">Bracelets</Nav.Link>
+
+            <Nav.Link as={Link} to="/" className="px-3">
+              Home
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/shop" className="px-3">
+              Shop
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/ring" className="px-3">
+              Rings
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/necklace" className="px-3">
+              Necklaces
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/earings" className="px-3">
+              Earrings
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/bracelets" className="px-3">
+              Bracelets
+            </Nav.Link>
+
           </Nav>
 
           <div className="nav-icons">
