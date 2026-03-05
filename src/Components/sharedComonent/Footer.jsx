@@ -10,7 +10,7 @@ import {
   Twitter
 } from "@mui/icons-material";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Footer.css";
+import "./footer.css";
 
 const Footer = () => {
   return (
