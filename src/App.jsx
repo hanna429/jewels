@@ -1,13 +1,13 @@
 
 import './App.css'
-import Jewels from './Components/Home/Home'
+import Home from './Components/Pages/Home'
 
 function App() {
  
 
   return (
     <>
-    <Jewels/>
+    <Home/>
     </>
   )
 }

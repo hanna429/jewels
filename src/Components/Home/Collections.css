@@ -1,0 +1,92 @@
+.collections-section{
+  padding:80px 0;
+  background:#fdfbf8;
+  text-align:center;
+}
+
+/* Browse label */
+
+.browse-label{
+  color:#C5A059;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:0.8rem;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+/* Heading */
+
+.collections-heading{
+  font-family:'Playfair Display', serif;
+  font-size:2.5rem;
+  margin-bottom:50px;
+  color:#1a1a1a;
+}
+
+/* Card */
+
+.collection-card{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  height:450px;
+  cursor:pointer;
+  transition:transform 0.3s ease;
+}
+
+.collection-card:hover{
+  transform:translateY(-10px);
+}
+
+/* Image */
+
+.collection-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.5s ease;
+}
+
+.collection-card:hover .collection-img{
+  transform:scale(1.05);
+}
+
+/* Gradient overlay */
+
+.collection-gradient{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+
+  background:linear-gradient(
+  to top,
+  rgba(0,0,0,0.4) 0%,
+  rgba(0,0,0,0) 50%);
+
+  z-index:1;
+}
+
+/* Text overlay */
+
+.collection-overlay{
+  position:absolute;
+  bottom:30px;
+  left:30px;
+  text-align:left;
+  color:#fff;
+  z-index:2;
+}
+
+.collection-title{
+  font-family:'Playfair Display', serif;
+  font-size:1.5rem;
+  margin:0;
+}
+
+.collection-count{
+  font-size:0.85rem;
+  opacity:0.9;
+}

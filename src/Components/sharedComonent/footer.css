@@ -1,0 +1,165 @@
+.site-bg{
+  background:#fdfbf8;
+}
+
+/* Navbar */
+
+.navbar-custom{
+  background:#fdfbf8;
+  padding:15px 0;
+}
+
+.brand-title{
+  font-family:'Playfair Display', serif;
+  font-weight:700;
+  font-size:1.8rem;
+}
+
+.brand-tag{
+  font-size:0.6rem;
+  letter-spacing:2px;
+  color:#d4af37;
+}
+
+.nav-links{
+  text-transform:uppercase;
+  font-size:0.9rem;
+  font-weight:600;
+}
+
+.nav-icons{
+  display:flex;
+  gap:15px;
+  cursor:pointer;
+}
+
+
+/* Newsletter */
+
+.newsletter-section{
+  background:#1a1612;
+  color:#fff;
+  padding:80px 0;
+  text-align:center;
+}
+
+.newsletter-title{
+  font-family:'Playfair Display', serif;
+  font-size:2.5rem;
+}
+
+.newsletter-text{
+  opacity:0.7;
+  margin-bottom:30px;
+}
+
+.newsletter-form-wrapper{
+  display:flex;
+  justify-content:center;
+}
+
+.newsletter-form{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  max-width:500px;
+  width:100%;
+}
+
+.newsletter-input{
+  flex:1;
+  background:#f0ede9;
+  border:none;
+  border-radius:25px;
+  padding:12px 25px;
+  color:#fff;
+}
+
+.newsletter-btn{
+  background:#d4af37;
+  border:none;
+  border-radius:25px;
+  padding:12px 30px;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+
+/* Footer */
+
+.footer{
+  background:#1a1612;
+  color:#fff;
+  padding:60px 0 20px 0;
+  border-top:1px solid #333;
+}
+
+.footer-brand{
+  font-family:'Playfair Display', serif;
+}
+
+.footer-tag{
+  color:#d4af37;
+  font-size:0.7rem;
+  letter-spacing:1px;
+}
+
+.footer-desc{
+  opacity:0.7;
+  width:75%;
+}
+
+.footer-heading{
+  margin-bottom:20px;
+}
+
+.footer-links{
+  list-style:none;
+  padding:0;
+}
+
+.footer-links li{
+  margin-bottom:8px;
+}
+
+.footer-links a{
+  color:#fff;
+  text-decoration:none;
+  opacity:0.7;
+}
+
+.footer-links a:hover{
+  color:#d4af37;
+}
+
+.footer-contact{
+  opacity:0.7;
+  margin-bottom:15px;
+}
+
+.social-icons{
+  display:flex;
+  gap:10px;
+}
+
+.social-circle{
+  border:1px solid #d4af37;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#d4af37;
+}
+
+.footer-divider{
+  margin:40px 0;
+  opacity:0.2;
+}
+
+.footer-bottom{
+  text-align:center;
+  font-size:0.85rem;
+  opacity:0.5;
+}
