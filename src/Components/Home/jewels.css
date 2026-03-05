@@ -1,0 +1,99 @@
+.main-bg{
+  background-color:#fdfbf8;
+}
+
+/* Navbar */
+
+.navbar-custom{
+  background-color:#fdfbf8;
+  padding:20px 0;
+}
+
+.brand{
+  font-family:'Playfair Display', serif;
+  font-weight:700;
+  color:#1a1a1a !important;
+}
+
+.brand-title{
+  font-size:1.8rem;
+}
+
+.brand-subtitle{
+  font-size:0.6rem;
+  letter-spacing:2px;
+  color:#d4af37;
+}
+
+/* Nav Links */
+
+.nav-links{
+  font-size:0.9rem;
+  font-weight:500;
+  text-transform:uppercase;
+}
+
+/* Icons */
+
+.nav-icons{
+  display:flex;
+  gap:15px;
+  align-items:center;
+  cursor:pointer;
+}
+
+
+/* Hero Section */
+
+.hero-section{
+  background:
+  linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)),
+  url("/src/assets/je.jfif");
+
+  background-size:cover;
+  background-position:center;
+  min-height:90vh;
+
+  display:flex;
+  align-items:center;
+  color:white;
+}
+
+.hero-subtitle{
+  letter-spacing:4px;
+  color:#e5e5e5;
+  text-transform:uppercase;
+  margin-bottom:15px;
+}
+
+.hero-title{
+  font-family:'Playfair Display', serif;
+  font-size:4rem;
+  margin-bottom:20px;
+}
+
+.gold-text{
+  color:#d4af37;
+}
+
+.hero-desc{
+  max-width:450px;
+  font-weight:300;
+  font-size:1.2rem;
+  margin-bottom:25px;
+}
+
+/* Gold Button */
+
+.gold-button{
+  background:#d4af37 !important;
+  border:none !important;
+  border-radius:25px !important;
+  padding:12px 30px !important;
+  font-size:1rem !important;
+  font-weight:600 !important;
+
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:10px;
+}
