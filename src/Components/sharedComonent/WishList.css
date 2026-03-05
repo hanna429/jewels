@@ -1,0 +1,36 @@
+.gold-text {
+  color: #D4AF37;
+  font-family: 'Playfair Display', serif;
+}
+
+.wishlist-img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.remove-btn:hover {
+  background: #ff4d4d;
+  color: white;
+}
+
+.price-tag {
+  font-weight: bold;
+  color: #333;
+}
+
+.small-title {
+  font-size: 0.9rem;
+  height: 40px;
+}

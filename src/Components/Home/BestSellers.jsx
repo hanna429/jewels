@@ -1,89 +1,198 @@
-import React from 'react';
-import { Container, Row, Col, Badge } from 'react-bootstrap';
-import { Star, FavoriteBorder, LocalMallOutlined, East } from '@mui/icons-material';
-import './BestSellers.css';
+import React, { useState, useContext } from "react";
+import { Container, Row, Col, Badge, Modal, Button } from "react-bootstrap";
+import { Star, FavoriteBorder, Favorite, LocalMallOutlined, East } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../Navelements/CartContext";
+import { WishlistContext } from "../sharedComonent/WishListContext";
+import "./BestSellers.css";
 
-import ringImg from '../../assets/rings/two.jfif';
-import necklaceImg from '../../assets/Necklaces/two.jfif';
-import braceletImg from '../../assets/Bracelet/two.jfif';
-import earringImg from '../../assets/Earings/two.jfif';
+import ringImg from "../../assets/rings/two.jfif";
+import necklaceImg from "../../assets/Necklaces/two.jfif";
+import braceletImg from "../../assets/Bracelet/two.jfif";
+import earringImg from "../../assets/Earings/two.jfif";
 
 const BestSellers = () => {
 
-  const products = [
-    { name: 'Celestial Diamond Ring', category: 'Rings', price: '₹24,999', rating: 4.9, reviews: 47, tag: 'BESTSELLER', img: ringImg },
-    { name: 'Golden Sunburst Necklace', category: 'Necklaces', price: '₹18,499', rating: 4.8, reviews: 35, tag: 'NEW', img: necklaceImg },
-    { name: 'Royal Diamond Bracelet', category: 'Bracelets', price: '₹32,999', rating: 5.0, reviews: 19, tag: 'LIMITED', img: braceletImg },
-    { name: 'Pearl Drop Earing', category: 'Earings', price: '₹14,999', rating: 4.8, reviews: 41, tag: 'TRENDING', img: earringImg },
-  ];
+const navigate = useNavigate();
 
-  return (
-    <section className="best-section">
+const { addToCart } = useContext(CartContext);
+const { wishlist, toggleWishlist } = useContext(WishlistContext);
 
-      <Container>
+const [show, setShow] = useState(false);
+const [selectedProduct, setSelectedProduct] = useState(null);
 
-        <div className="best-header">
+const products = [
+{ id:1, name:"Celestial Diamond Ring", category:"Rings", price:24999, rating:4.9, reviews:47, tag:"BESTSELLER", image:ringImg },
+{ id:2, name:"Golden Sunburst Necklace", category:"Necklaces", price:18499, rating:4.8, reviews:35, tag:"NEW", image:necklaceImg },
+{ id:3, name:"Royal Diamond Bracelet", category:"Bracelets", price:32999, rating:5.0, reviews:19, tag:"LIMITED", image:braceletImg },
+{ id:4, name:"Pearl Drop Earing", category:"Earings", price:14999, rating:4.8, reviews:41, tag:"TRENDING", image:earringImg },
+];
 
-          <div>
-            <div className="best-label">TRENDING</div>
-            <h2 className="best-title">Best Sellers</h2>
-          </div>
+const openProduct = (product) => {
+setSelectedProduct(product);
+setShow(true);
+};
 
-          <a href="#all" className="view-all">
-            View All <East fontSize="small"/>
-          </a>
+const handleAddToCart = (product) => {
+addToCart(product);
+alert("Added to cart!");
+};
 
-        </div>
+const isLiked = (id) => {
+return wishlist?.some(item => item.id === id);
+};
 
-        <Row className="g-4">
+return (
 
-          {products.map((p,i)=>(
-            <Col key={i} lg={3} md={6}>
+<section className="best-section">
 
-              <div className="product-card">
+<Container>
 
-                <div className="product-img-container">
+<div className="best-header">
 
-                  <img src={p.img} alt={p.name} className="product-img"/>
+<div>
+<div className="best-label">TRENDING</div>
+<h2 className="best-title">Best Sellers</h2>
+</div>
 
-                  <Badge className="product-badge">{p.tag}</Badge>
+<div
+className="view-all"
+onClick={() => navigate("/shop")}
+style={{cursor:"pointer"}}
+>
+View All <East fontSize="small"/>
+</div>
 
-                  <div className="wishlist-btn">
-                    <FavoriteBorder/>
-                  </div>
+</div>
 
-                  <div className="cart-btn">
-                    <LocalMallOutlined/>
-                  </div>
+<Row className="g-4">
 
-                </div>
+{products.map((p,index)=>(
 
-                <div className="product-details">
+<Col key={`${p.id}-${index}`} lg={3} md={6}>
 
-                  <div className="product-category">{p.category}</div>
+<div className="product-card">
 
-                  <h4 className="product-name">{p.name}</h4>
+<div className="product-img-container">
 
-                  <div className="product-rating">
-                    <Star className="star-icon"/>
-                    <span>{p.rating} ({p.reviews})</span>
-                  </div>
+<img
+src={p.image}
+alt={p.name}
+className="product-img"
+onClick={()=>openProduct(p)}
+style={{cursor:"pointer"}}
+/>
 
-                  <div className="product-price">{p.price}</div>
+<Badge className="product-badge">
+{p.tag}
+</Badge>
 
-                </div>
+{/* Wishlist */}
 
-              </div>
+<div
+className="wishlist-btn"
+onClick={()=>toggleWishlist(p)}
+>
+{isLiked(p.id)
+? <Favorite style={{color:"red"}}/>
+: <FavoriteBorder/>
+}
+</div>
 
-            </Col>
-          ))}
+{/* Add To Cart */}
 
-        </Row>
+<div
+className="cart-btn"
+onClick={()=>handleAddToCart(p)}
+>
+<LocalMallOutlined/>
+</div>
 
-      </Container>
+</div>
 
-    </section>
-  );
+<div className="product-details">
+
+<div className="product-category">
+{p.category}
+</div>
+
+<h4 className="product-name">
+{p.name}
+</h4>
+
+<div className="product-rating">
+<Star className="star-icon"/>
+<span>{p.rating} ({p.reviews})</span>
+</div>
+
+<div className="product-price">
+₹{p.price}
+</div>
+
+</div>
+
+</div>
+
+</Col>
+
+))}
+
+</Row>
+
+</Container>
+
+{/* PRODUCT POPUP */}
+
+<Modal show={show} onHide={()=>setShow(false)} centered>
+
+{selectedProduct && (
+
+<>
+
+<Modal.Header closeButton>
+<Modal.Title>{selectedProduct.name}</Modal.Title>
+</Modal.Header>
+
+<Modal.Body>
+
+<img
+src={selectedProduct.image}
+alt={selectedProduct.name}
+style={{width:"100%", borderRadius:"10px"}}
+/>
+
+<h5 style={{marginTop:"15px"}}>
+{selectedProduct.category}
+</h5>
+
+<p>
+⭐ {selectedProduct.rating} ({selectedProduct.reviews})
+</p>
+
+<h4>₹{selectedProduct.price}</h4>
+
+</Modal.Body>
+
+<Modal.Footer>
+
+<Button
+variant="dark"
+onClick={()=>handleAddToCart(selectedProduct)}
+
+>
+
+<LocalMallOutlined fontSize="small"/> Add To Cart </Button>
+
+</Modal.Footer>
+
+</>
+
+)}
+
+</Modal>
+
+</section>
+);
 };
 
 export default BestSellers;

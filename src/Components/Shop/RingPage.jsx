@@ -1,5 +1,8 @@
-import React from "react";
-import { Heart, Search } from "lucide-react";
+import React, { useState, useContext } from "react";
+import { Heart, Search, ShoppingCart } from "lucide-react";
+import { Modal, Button } from "react-bootstrap";
+import { CartContext } from "../Navelements/CartContext";
+import { WishlistContext } from "../sharedComonent/WishListContext";
 import "./RingPage.css";
 
 import ring1 from "../../assets/rings/one.jfif";
@@ -8,128 +11,113 @@ import ring3 from "../../assets/rings/three.jfif";
 import ring4 from "../../assets/rings/Four.jfif";
 import ring5 from "../../assets/rings/five.jfif";
 
-
 const products = [
-  {
-    id: 1,
-    name: "Aurora Anti-Tarnish Diamond Ring",
-    category: "Rings",
-    price: 1499,
-    image: ring1,
-    isBestseller: true,
-  },
-  {
-    id: 2,
-    name: "Eternal Shine Gold Band",
-    category: "Rings",
-    price: 1199,
-    image: ring2,
-    isBestseller: false,
-  },
-  {
-    id: 3,
-    name: "Royal Glow Anti-Tarnish Ring",
-    category: "Rings",
-    price: 1699,
-    image: ring3,
-    isBestseller: true,
-  },
-  {
-    id: 4,
-    name: "Luxe Spark Anti-Tarnish Band",
-    category: "Rings",
-    price: 1299,
-    image: ring4,
-    isBestseller: false,
-  },
-  {
-    id: 5,
-    name: "Golden Aura Anti-Tarnish Ring",
-    category: "Rings",
-    price: 1399,
-    image: ring5,
-    isBestseller: true,
-  },
+  { id: 1, name: "Aurora Anti-Tarnish Diamond Ring", category: "Rings", price: 1499, image: ring1, isBestseller: true },
+  { id: 2, name: "Eternal Shine Gold Band", price: 1199, image: ring2 },
+  { id: 3, name: "Royal Glow Anti-Tarnish Ring", price: 1699, image: ring3, isBestseller: true },
+  { id: 4, name: "Luxe Spark Anti-Tarnish Band", price: 1299, image: ring4 },
+  { id: 5, name: "Golden Aura Anti-Tarnish Ring", price: 1399, image: ring5, isBestseller: true },
 ];
 
 const RingPage = () => {
+  const { addToCart } = useContext(CartContext);
+  // Get wishlist data from context
+  const wishlistContext = useContext(WishlistContext);
 
-  const ringProducts = products.filter(
-    (item) => item.category === "Rings"
-  );
+  const [show, setShow] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // Safety check: if context is missing, don't crash the app
+  if (!wishlistContext) {
+    return <div>Error: WishlistProvider not found in App.js</div>;
+  }
+
+  const { wishlist, toggleWishlist } = wishlistContext;
+
+  const isItemLiked = (id) => wishlist?.some((item) => item.id === id);
+
+  const openProduct = (product) => {
+    setSelectedProduct(product);
+    setShow(true);
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedProduct) return;
+    addToCart(selectedProduct);
+    setShow(false);
+  };
 
   return (
     <div className="ring-page">
-
-      {/* Header */}
-
       <div className="ring-header">
         <h1>Rings</h1>
-        <p>{ringProducts.length} pieces</p>
+        <p>{products.length} pieces</p>
       </div>
-
-      {/* Search */}
 
       <div className="search-box">
         <Search className="search-icon" />
-
-        <input
-          type="text"
-          placeholder="Search jewelry..."
-        />
+        <input type="text" placeholder="Search jewelry..." />
       </div>
 
-      {/* Product Grid */}
-
       <div className="product-grid">
-
-        {ringProducts.map((product) => (
-
+        {products.map((product) => (
           <div key={product.id} className="product-card">
-
-            {/* Image */}
-
             <div className="product-image">
-
               <img
                 src={product.image}
                 alt={product.name}
+                onClick={() => openProduct(product)}
+                style={{ cursor: "pointer" }}
               />
 
               {product.isBestseller && (
-                <span className="badge">
-                  BESTSELLER
-                </span>
+                <span className="badge">BESTSELLER</span>
               )}
 
-              <button className="wishlist-btn">
-                <Heart size={16} />
+              <button
+                className="wishlist-btn"
+                onClick={() => toggleWishlist(product)}
+              >
+                <Heart
+                  size={16}
+                  color={isItemLiked(product.id) ? "red" : "black"}
+                  fill={isItemLiked(product.id) ? "red" : "none"}
+                />
               </button>
-
             </div>
-
-            {/* Details */}
 
             <div className="product-info">
-
               <h3>{product.name}</h3>
-
-              <p className="product-category">
-                {product.category}
-              </p>
-
-              <p className="product-price">
-                ₹{product.price}
-              </p>
-
+              <p className="product-price">₹{product.price}</p>
             </div>
-
           </div>
-
         ))}
-
       </div>
 
+      <Modal show={show} onHide={() => setShow(false)} centered>
+        {selectedProduct && (
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>{selectedProduct.name}</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+              <img
+                src={selectedProduct.image}
+                alt={selectedProduct.name}
+                style={{ width: "100%", borderRadius: "10px" }}
+              />
+              <h4 style={{ marginTop: "15px" }}>₹{selectedProduct.price}</h4>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button variant="dark" onClick={handleAddToCart}>
+                <ShoppingCart size={16} /> Add To Cart
+              </Button>
+            </Modal.Footer>
+          </>
+        )}
+      </Modal>
     </div>
   );
 };

@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Heart, Search } from "lucide-react";
+import { LocalMallOutlined } from "@mui/icons-material";
+import { Modal, Button } from "react-bootstrap";
+import { CartContext } from "../Navelements/CartContext";
+import { WishlistContext } from "../sharedComonent/WishListContext";
 import "./RingPage.css";
 
 import neck1 from "../../assets/Necklaces/one.jfif";
@@ -8,134 +12,165 @@ import neck3 from "../../assets/Necklaces/three.jfif";
 import neck4 from "../../assets/Necklaces/four.jfif";
 import neck5 from "../../assets/Necklaces/five.jfif";
 
-
 const products = [
-  {
-    id: 1,
-    name: "Aurora Anti-Tarnish Necklace",
-    category: "Necklaces",
-    price: 1899,
-    image: neck1,
-    isBestseller: true,
-  },
-  {
-    id: 2,
-    name: "Golden Glow Chain Necklace",
-    category: "Necklaces",
-    price: 1499,
-    image: neck2,
-    isBestseller: false,
-  },
-  {
-    id: 3,
-    name: "Royal Pearl Necklace",
-    category: "Necklaces",
-    price: 2199,
-    image: neck3,
-    isBestseller: true,
-  },
-  {
-    id: 4,
-    name: "Elegant Shine Pendant",
-    category: "Necklaces",
-    price: 1699,
-    image: neck4,
-    isBestseller: false,
-  },
-  {
-    id: 5,
-    name: "Luxe Anti-Tarnish Necklace",
-    category: "Necklaces",
-    price: 1999,
-    image: neck5,
-    isBestseller: true,
-  },
-    {
-    id: 6,
-    name: "Aurora Anti-Tarnish Necklace",
-    category: "Necklaces",
-    price: 1899,
-    image: neck2,
-    isBestseller: true,
-  }
+{ id: 1, name: "Aurora Anti-Tarnish Necklace", category: "Necklaces", price: 1899, image: neck1, isBestseller: true },
+{ id: 2, name: "Golden Glow Chain Necklace", category: "Necklaces", price: 1499, image: neck2 },
+{ id: 3, name: "Royal Pearl Necklace", category: "Necklaces", price: 2199, image: neck3, isBestseller: true },
+{ id: 4, name: "Elegant Shine Pendant", category: "Necklaces", price: 1699, image: neck4 },
+{ id: 5, name: "Luxe Anti-Tarnish Necklace", category: "Necklaces", price: 1999, image: neck5, isBestseller: true },
+{ id: 6, name: "Aurora Anti-Tarnish Necklace", category: "Necklaces", price: 1899, image: neck2 },
 ];
 
 const NecklacePage = () => {
 
-  const necklaceProducts = products.filter(
-    (item) => item.category === "Necklaces"
-  );
+const { addToCart } = useContext(CartContext);
+const { wishlist, toggleWishlist } = useContext(WishlistContext);
 
-  return (
-    <div className="ring-page">
+const [show, setShow] = useState(false);
+const [selectedProduct, setSelectedProduct] = useState(null);
 
-      {/* Header */}
+const necklaceProducts = products.filter(
+(item) => item.category === "Necklaces"
+);
 
-      <div className="ring-header">
-        <h1>Necklaces</h1>
-        <p>{necklaceProducts.length} pieces</p>
-      </div>
+const isItemLiked = (id) =>
+wishlist.some((item) => item.id === id);
 
-      {/* Search */}
+const openProduct = (product) => {
+setSelectedProduct(product);
+setShow(true);
+};
 
-      <div className="search-box">
-        <Search className="search-icon" />
+const handleAddToCart = (product) => {
+addToCart(product);
+alert("Product added to cart!");
+};
 
-        <input
-          type="text"
-          placeholder="Search jewelry..."
-        />
-      </div>
+return (
 
-      {/* Product Grid */}
+<div className="ring-page">
 
-      <div className="product-grid">
+<div className="ring-header">
+<h1>Necklaces</h1>
+<p>{necklaceProducts.length} pieces</p>
+</div>
 
-        {necklaceProducts.map((product) => (
+<div className="search-box">
+<Search className="search-icon"/>
+<input type="text" placeholder="Search jewelry..." />
+</div>
 
-          <div key={product.id} className="product-card">
+<div className="product-grid">
 
-            <div className="product-image">
+{necklaceProducts.map((product,index) => (
 
-              <img
-                src={product.image}
-                alt={product.name}
-              />
+<div key={`${product.id}-${index}`} className="product-card">
 
-              {product.isBestseller && (
-                <span className="badge">
-                  BESTSELLER
-                </span>
-              )}
+<div className="product-image">
 
-              <button className="wishlist-btn">
-                <Heart size={16} />
-              </button>
+<img
+src={product.image}
+alt={product.name}
+onClick={() => openProduct(product)}
+style={{cursor:"pointer"}}
+/>
 
-            </div>
+{product.isBestseller && ( <span className="badge">BESTSELLER</span>
+)}
 
-            <div className="product-info">
+{/* Wishlist Button */}
 
-              <h3>{product.name}</h3>
+<button
+className="wishlist-btn"
+onClick={() => toggleWishlist(product)}
 
-              <p className="product-category">
-                {product.category}
-              </p>
+>
 
-              <p className="product-price">
-                ₹{product.price}
-              </p>
+<Heart
+size={16}
+color={isItemLiked(product.id) ? "red" : "black"}
+fill={isItemLiked(product.id) ? "red" : "none"}
+/> </button>
 
-            </div>
+{/* Add To Cart Icon */}
 
-          </div>
+<button
+className="cart-btn"
+onClick={() => handleAddToCart(product)}
 
-        ))}
+>
 
-      </div>
+<LocalMallOutlined fontSize="small"/>
+</button>
 
-    </div>
-  );
+</div>
+
+<div className="product-info">
+
+<h3>{product.name}</h3>
+
+<p className="product-category">
+{product.category}
+</p>
+
+<p className="product-price">
+₹{product.price}
+</p>
+
+</div>
+
+</div>
+
+))}
+
+</div>
+
+<Modal show={show} onHide={()=>setShow(false)} centered>
+
+{selectedProduct && (
+
+<>
+
+<Modal.Header closeButton>
+<Modal.Title>{selectedProduct.name}</Modal.Title>
+</Modal.Header>
+
+<Modal.Body>
+
+<img
+src={selectedProduct.image}
+alt={selectedProduct.name}
+style={{width:"100%",borderRadius:"10px"}}
+/>
+
+<h5 style={{marginTop:"15px"}}>
+{selectedProduct.category}
+</h5>
+
+<h4>₹{selectedProduct.price}</h4>
+
+</Modal.Body>
+
+<Modal.Footer>
+
+<Button
+variant="dark"
+onClick={()=>handleAddToCart(selectedProduct)}
+
+>
+
+<LocalMallOutlined fontSize="small"/> Add To Cart </Button>
+
+</Modal.Footer>
+
+</>
+
+)}
+
+</Modal>
+
+</div>
+);
 };
 
 export default NecklacePage;

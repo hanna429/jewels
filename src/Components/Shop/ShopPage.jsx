@@ -1,141 +1,215 @@
-import React from 'react';
-import { Container, Row, Col, Form, Badge } from 'react-bootstrap';
-import { Search, FavoriteBorder, LocalMallOutlined, Star } from '@mui/icons-material';
+import React, { useState, useContext } from "react";
+import { Container, Row, Col, Form, Badge, Modal, Button } from "react-bootstrap";
+import { Search, FavoriteBorder, Favorite, LocalMallOutlined, Star } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
+import { CartContext } from "../Navelements/CartContext";
+import { WishlistContext } from "../sharedComonent/WishListContext";
 import "./ShopPage.css";
 
-import ring1 from '../../assets/rings/one.jfif';
-import ring2 from '../../assets/rings/two.jfif';
+import ring1 from "../../assets/rings/one.jfif";
+import ring2 from "../../assets/rings/two.jfif";
 
-import neck1 from '../../assets/Necklaces/one.jfif';
-import neck2 from '../../assets/Necklaces/two.jfif';
+import neck1 from "../../assets/Necklaces/one.jfif";
+import neck2 from "../../assets/Necklaces/two.jfif";
 
-import ear1 from '../../assets/Earings/one.jfif';
-import ear2 from '../../assets/Earings/two.jfif';
+import ear1 from "../../assets/Earings/one.jfif";
+import ear2 from "../../assets/Earings/two.jfif";
 
-import brac1 from '../../assets/Bracelet/one.jfif';
-import brac2 from '../../assets/Bracelet/two.jfif';
+import brac1 from "../../assets/Bracelet/one.jfif";
+import brac2 from "../../assets/Bracelet/two.jfif";
 
 const allProducts = [
-  { id: 1, name: 'Celestial Diamond Ring', category: 'rings', price: '₹24,999', rating: 4.9, reviews: 47, tag: 'BESTSELLER', img: ring1 },
-  { id: 2, name: 'Golden Sunburst Necklace', category: 'necklaces', price: '₹18,499', rating: 4.8, reviews: 35, tag: 'NEW', img: neck1 },
-  { id: 3, name: 'Teardrop Diamond Earrings', category: 'earrings', price: '₹12,999', rating: 4.8, reviews: 41, tag: 'TRENDING', img: ear1 },
-  { id: 4, name: 'Royal Diamond Bracelet', category: 'bracelets', price: '₹32,999', rating: 5.0, reviews: 19, tag: 'LIMITED', img: brac1 },
-  { id: 5, name: 'Classic Gold Band', category: 'rings', price: '₹15,499', rating: 4.7, reviews: 22, tag: '', img: ring2 },
-  { id: 6, name: 'Emerald Pendant', category: 'necklaces', price: '₹21,999', rating: 4.9, reviews: 15, tag: 'NEW', img: neck2 },
-  { id: 7, name: 'Crystal Studs', category: 'earrings', price: '₹8,999', rating: 4.6, reviews: 54, tag: '', img: ear2 },
-  { id: 8, name: 'Infinity Chain Bracelet', category: 'bracelets', price: '₹19,999', rating: 4.8, reviews: 28, tag: 'BESTSELLER', img: brac2 },
+{ id: 1, name: "Celestial Diamond Ring", category: "rings", price: 24999, rating: 4.9, reviews: 47, tag: "BESTSELLER", image: ring1 },
+{ id: 2, name: "Golden Sunburst Necklace", category: "necklaces", price: 18499, rating: 4.8, reviews: 35, tag: "NEW", image: neck1 },
+{ id: 3, name: "Teardrop Diamond Earrings", category: "earrings", price: 12999, rating: 4.8, reviews: 41, tag: "TRENDING", image: ear1 },
+{ id: 4, name: "Royal Diamond Bracelet", category: "bracelets", price: 32999, rating: 5.0, reviews: 19, tag: "LIMITED", image: brac1 },
+{ id: 5, name: "Classic Gold Band", category: "rings", price: 15499, rating: 4.7, reviews: 22, tag: "", image: ring2 },
+{ id: 6, name: "Emerald Pendant", category: "necklaces", price: 21999, rating: 4.9, reviews: 15, tag: "NEW", image: neck2 },
+{ id: 7, name: "Crystal Studs", category: "earrings", price: 8999, rating: 4.6, reviews: 54, tag: "", image: ear2 },
+{ id: 8, name: "Infinity Chain Bracelet", category: "bracelets", price: 19999, rating: 4.8, reviews: 28, tag: "BESTSELLER", image: brac2 },
 ];
 
 const ShopPage = () => {
 
-  const { category } = useParams();
+const { category } = useParams();
 
-  const filteredProducts = category
-    ? allProducts.filter(p => p.category === category)
-    : allProducts;
+const { addToCart } = useContext(CartContext);
+const { wishlist, toggleWishlist } = useContext(WishlistContext);
 
-  return (
-    <div className="shop-page">
+const [show, setShow] = useState(false);
+const [selectedProduct, setSelectedProduct] = useState(null);
 
-      <Container>
+const filteredProducts = category
+? allProducts.filter(p => p.category === category)
+: allProducts;
 
-        {/* Header */}
+const openProduct = (product) => {
+setSelectedProduct(product);
+setShow(true);
+};
 
-        <div className="mb-4">
-          <h1 className="shop-title">All Jewelry</h1>
-          <p className="text-muted">{filteredProducts.length} pieces</p>
-        </div>
+const handleAddToCart = (product) => {
+addToCart(product);
+alert("Added to cart!");
+};
 
-        {/* Search + Sort */}
+const isLiked = (id) => {
+return wishlist?.some(item => item.id === id);
+};
 
-        <Row className="mb-5 align-items-center">
+return (
 
-          <Col md={8} className="search-wrapper">
+<div className="shop-page">
 
-            <Search className="search-icon" />
+<Container>
 
-            <Form.Control
-              type="text"
-              placeholder="Search jewelry..."
-              className="search-input"
-            />
+<div className="mb-4">
+<h1 className="shop-title">All Jewelry</h1>
+<p className="text-muted">{filteredProducts.length} pieces</p>
+</div>
 
-          </Col>
+<Row className="mb-5 align-items-center">
 
-          <Col md={4} className="d-flex justify-content-md-end mt-3 mt-md-0">
+<Col md={8} className="search-wrapper">
+<Search className="search-icon"/>
 
-            <Form.Select className="sort-select">
-              <option>Latest</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-            </Form.Select>
+<Form.Control
+type="text"
+placeholder="Search jewelry..."
+className="search-input"
+/>
 
-          </Col>
+</Col>
 
-        </Row>
+<Col md={4} className="d-flex justify-content-md-end mt-3 mt-md-0">
 
-        {/* Product Grid */}
+<Form.Select className="sort-select">
 
-        <Row className="g-4">
+<option>Latest</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+</Form.Select>
 
-          {filteredProducts.map((p) => (
+</Col>
 
-            <Col key={p.id} md={6} lg={4}>
+</Row>
 
-              <div className="product-card">
+<Row className="g-4">
 
-                <div className="position-relative mb-3">
+{filteredProducts.map((p,index) => (
 
-                  <img
-                    src={p.img}
-                    alt={p.name}
-                    className="product-img"
-                  />
+<Col key={`${p.id}-${index}`} md={6} lg={4}>
 
-                  {p.tag && (
-                    <Badge className="product-badge">
-                      {p.tag}
-                    </Badge>
-                  )}
+<div className="product-card">
 
-                  <div className="wishlist-btn">
-                    <FavoriteBorder fontSize="small" />
-                  </div>
+<div className="position-relative mb-3">
 
-                  <div className="cart-btn">
-                    <LocalMallOutlined fontSize="small" />
-                  </div>
+<img
+src={p.image}
+alt={p.name}
+className="product-img"
+onClick={() => openProduct(p)}
+style={{cursor:"pointer"}}
+/>
 
-                </div>
+{p.tag && ( <Badge className="product-badge">
+{p.tag} </Badge>
+)}
 
-                <div className="text-start">
+{/* Wishlist */}
 
-                  <h5 className="product-name">
-                    {p.name}
-                  </h5>
+<div
+className="wishlist-btn"
+onClick={() => toggleWishlist(p)}
+>
+{isLiked(p.id)
+? <Favorite style={{color:"red"}} fontSize="small"/>
+: <FavoriteBorder fontSize="small"/>
+}
+</div>
 
-                  <div className="d-flex align-items-center gap-1 mb-1">
-                    <Star className="rating-star" />
-                    <span className="small">{p.rating} ({p.reviews})</span>
-                  </div>
+{/* Cart */}
 
-                  <div className="fw-bold">{p.price}</div>
+<div
+className="cart-btn"
+onClick={() => handleAddToCart(p)}
+>
+<LocalMallOutlined fontSize="small"/>
+</div>
 
-                </div>
+</div>
 
-              </div>
+<div className="text-start">
 
-            </Col>
+<h5 className="product-name">{p.name}</h5>
 
-          ))}
+<div className="d-flex align-items-center gap-1 mb-1">
+<Star className="rating-star"/>
+<span className="small">{p.rating} ({p.reviews})</span>
+</div>
 
-        </Row>
+<div className="fw-bold">₹{p.price}</div>
 
-      </Container>
+</div>
 
-    </div>
-  );
+</div>
+
+</Col>
+
+))}
+
+</Row>
+
+</Container>
+
+<Modal show={show} onHide={()=>setShow(false)} centered>
+
+{selectedProduct && (
+
+<>
+
+<Modal.Header closeButton>
+<Modal.Title>{selectedProduct.name}</Modal.Title>
+</Modal.Header>
+
+<Modal.Body>
+
+<img
+src={selectedProduct.image}
+alt={selectedProduct.name}
+style={{width:"100%",borderRadius:"10px"}}
+/>
+
+<h5 className="mt-3">{selectedProduct.category}</h5>
+
+<p>
+⭐ {selectedProduct.rating} ({selectedProduct.reviews})
+</p>
+
+<h4>₹{selectedProduct.price}</h4>
+
+</Modal.Body>
+
+<Modal.Footer>
+
+<Button
+variant="dark"
+onClick={()=>handleAddToCart(selectedProduct)}
+
+>
+
+<LocalMallOutlined fontSize="small"/> Add To Cart </Button>
+
+</Modal.Footer>
+
+</>
+
+)}
+
+</Modal>
+
+</div>
+);
 };
 
 export default ShopPage;

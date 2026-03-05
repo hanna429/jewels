@@ -76,7 +76,7 @@ const Footer = () => {
               <h6 className="footer-heading">Quick Links</h6>
 
               <ul className="footer-links">
-                {["Shop All","Rings","Necklaces","Earrings","Bracelets"].map((link)=>(
+                {["Shop All","Ring","Necklaces","Earrings","Bracelets"].map((link)=>(
                   <li key={link}><a href="#">{link}</a></li>
                 ))}
               </ul>
