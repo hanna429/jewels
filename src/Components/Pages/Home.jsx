@@ -3,7 +3,6 @@ import Jewels from '../Home/Home'
 import Collections from '../Home/Collections'
 import BestSellers from '../Home/BestSellers'
 import Review from '../Home/Review'
-import Footer from '../sharedComonent/Footer'
 
 function Home() {
   return (
@@ -12,7 +11,6 @@ function Home() {
         <Collections/>
         <BestSellers/>
         <Review/>
-        <Footer/>
     </div>
   )
 }
