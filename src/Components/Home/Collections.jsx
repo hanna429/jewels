@@ -2,13 +2,18 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Collections.css';
 
+import ringImg from '../../assets/rings/one.jfif';
+import necklaceImg from '../../assets/Necklaces/one.jfif';
+import earringImg from '../../assets/Earings/one.jfif';
+import braceletImg from '../../assets/Bracelet/one.jfif';
+
 const Collections = () => {
 
   const collectionData = [
-    { title: 'Rings', count: '24 pieces', img: '/src/assets/rings/one.jfif' },
-    { title: 'Necklaces', count: '18 pieces', img: '/src/assets/Necklaces/one.jfif' },
-    { title: 'Earrings', count: '32 pieces', img: '/src/assets/Earings/one.jfif' },
-    { title: 'Bracelets', count: '15 pieces', img: '/src/assets/Bracelet/one.jfif' },
+    { title: 'Rings', count: '24 pieces', img: ringImg },
+    { title: 'Necklaces', count: '18 pieces', img: necklaceImg },
+    { title: 'Earrings', count: '32 pieces', img: earringImg },
+    { title: 'Bracelets', count: '15 pieces', img: braceletImg },
   ];
 
   return (
