@@ -1,0 +1,217 @@
+/* ===== Layout ===== */
+
+.admin-layout{
+  display:flex;
+  min-height:100vh;
+  background:#f8f9fb;
+}
+
+.admin-main{
+  flex:1;
+  padding:40px;
+}
+
+/* ===== Header ===== */
+
+.view-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.view-header h1{
+  font-size:28px;
+  font-weight:700;
+  color:#111;
+}
+
+.view-header p{
+  color:#777;
+  font-size:14px;
+  margin-top:4px;
+}
+
+/* ===== Button ===== */
+
+.gold-btn{
+  background:#f59e0b;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.gold-btn:hover{
+  background:#d97706;
+}
+
+/* ===== Category Grid ===== */
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+}
+
+/* ===== Category Card ===== */
+
+.category-card{
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  border:1px solid #eee;
+  transition:0.2s;
+}
+
+.category-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Card Top */
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* Icon */
+
+.item-icon{
+  width:45px;
+  height:45px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+
+/* Actions */
+
+.card-actions{
+  display:flex;
+  gap:6px;
+}
+
+.action-icon{
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  padding:6px;
+  border-radius:6px;
+}
+
+.action-icon:hover{
+  background:#f3f4f6;
+}
+
+.action-icon.delete:hover{
+  background:#fee2e2;
+}
+
+/* Category Name */
+
+.cat-name{
+  font-size:16px;
+  font-weight:600;
+  margin-top:12px;
+}
+
+.cat-count{
+  font-size:13px;
+  color:#777;
+}
+
+/* ===== Modal ===== */
+
+.modal-mask{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modal-content{
+  background:white;
+  width:420px;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.modal-content.sm{
+  width:350px;
+}
+
+/* Modal Header */
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  border-bottom:1px solid #eee;
+}
+
+.modal-head h2{
+  font-size:18px;
+  font-weight:600;
+}
+
+/* Modal Form */
+
+.modal-form{
+  padding:20px;
+}
+
+.input-group{
+  display:flex;
+  flex-direction:column;
+  margin-bottom:15px;
+}
+
+.input-group label{
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.input-group input{
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  outline:none;
+}
+
+.input-group input:focus{
+  border-color:#f59e0b;
+}
+
+/* Submit Button */
+
+.submit-gold{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#f59e0b;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.submit-gold:hover{
+  background:#d97706;
+}

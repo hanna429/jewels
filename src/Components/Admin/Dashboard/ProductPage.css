@@ -1,0 +1,155 @@
+/* ProductPage.css */
+
+.page-wrapper{
+  display:flex;
+  min-height:100vh;
+  background:#FCFBF7;
+}
+
+/* content area */
+.main-content{
+  flex:1;
+  padding:40px;
+}
+
+/* heading section */
+.page-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:40px;
+}
+
+.page-title{
+  font-size:32px;
+  font-weight:700;
+  color:#111;
+}
+
+.page-subtitle{
+  color:#777;
+  margin-top:5px;
+}
+
+/* add button */
+.add-btn{
+  background:#f59e0b;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  color:white;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.add-btn:hover{
+  background:#d97706;
+}
+
+/* search */
+.search-box{
+  position:relative;
+  max-width:350px;
+  margin-bottom:30px;
+}
+
+.search-input{
+  width:100%;
+  padding:12px 15px 12px 40px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  outline:none;
+}
+
+.search-icon{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#888;
+}
+
+/* table */
+.product-table{
+  width:100%;
+  background:white;
+  border-radius:20px;
+  border:1px solid #eee;
+  overflow:hidden;
+}
+
+.product-table table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.product-table th{
+  background:#f9fafb;
+  text-transform:uppercase;
+  font-size:12px;
+  color:#999;
+  padding:16px;
+  text-align:left;
+}
+
+.product-table td{
+  padding:16px;
+  border-top:1px solid #eee;
+}
+
+/* product info */
+.product-info{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.product-icon{
+  width:45px;
+  height:45px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.category-tag{
+  background:#f3f4f6;
+  padding:5px 12px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* stock */
+.stock-low{
+  color:red;
+  font-weight:bold;
+}
+
+.stock-ok{
+  color:#555;
+}
+
+/* action buttons */
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.icon-btn{
+  padding:6px;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+}
+
+.icon-btn:hover{
+  background:#f3f4f6;
+  border-radius:6px;
+}
